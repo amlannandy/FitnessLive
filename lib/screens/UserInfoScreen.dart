@@ -1,9 +1,11 @@
-import 'package:fitness_live/services/UserInfoProvider.dart';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
 import '../widgets/CustomTextField.dart';
+import '../services/UserInfoProvider.dart';
+import '../widgets/ProfilePictureContainer.dart';
 
 class UserInfoScreen extends StatefulWidget {
   @override
@@ -18,6 +20,7 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
 
   String _gender = 'male';
   bool _isDiabetic = false;
+  File _imageFile;
   final _nameController = TextEditingController();
   final _phoneController = TextEditingController();
   final _ageController = TextEditingController();
@@ -33,6 +36,7 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
         scaffoldKey: _scaffoldKey,
         name: _nameController.text,
         phone: _phoneController.text,
+        image: _imageFile,
         age: _ageController.text,
         gender: _gender,
         height: _heightController.text,
@@ -104,6 +108,12 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
         content: BasicInfoStep(
           nameController: _nameController,
           phoneController: _phoneController,
+          image: _imageFile,
+          callback: (newFile) {
+            setState(() {
+              _imageFile = newFile;
+            });
+          },
         ),
       ),
       Step(
@@ -137,10 +147,14 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
 class BasicInfoStep extends StatelessWidget {
   final TextEditingController nameController;
   final TextEditingController phoneController;
+  final File image;
+  final Function callback;
 
   BasicInfoStep({
     this.nameController,
     this.phoneController,
+    this.image,
+    this.callback,
   });
 
   @override
@@ -149,6 +163,8 @@ class BasicInfoStep extends StatelessWidget {
       children: [
         Column(
           children: [
+            ProfilePictureContainer(image, callback),
+            SizedBox(height: 10),
             CustomTextField(
               controller: nameController,
               labelText: 'Enter Name',
