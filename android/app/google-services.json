@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "970897097591",
+    "project_id": "fitness-live-97b12",
+    "storage_bucket": "fitness-live-97b12.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:970897097591:android:ae3b660bc9741077885772",
+        "android_client_info": {
+          "package_name": "com.example.fitness_live"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "970897097591-ati7lce40jv0gl78jmca0gid76qnte9m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD3aKpyz_AyL4Z8L8aaxbK1Da24lPReUEM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "970897097591-ati7lce40jv0gl78jmca0gid76qnte9m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
