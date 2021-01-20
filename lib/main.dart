@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import './screens/InitScreen.dart';
+import './screens/HomeScreen.dart';
 import './screens/LoginScreen.dart';
 import './screens/UserInfoScreen.dart';
 
@@ -26,10 +27,14 @@ class MyApp extends StatelessWidget {
             fontSize: 24,
           ),
         ),
+        buttonTheme: ButtonThemeData(
+          buttonColor: Color(0xff937FF1),
+        ),
       ),
       initialRoute: '/init',
       routes: {
         '/init': (ctx) => InitScreen(),
+        '/home': (ctx) => HomeScreen(),
         '/login': (ctx) => LoginScreen(),
         '/userinfo': (ctx) => UserInfoScreen(),
       },

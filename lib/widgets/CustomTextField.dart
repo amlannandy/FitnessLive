@@ -34,7 +34,7 @@ class CustomTextField extends StatelessWidget {
           if (validations != null) {
             return validations(text);
           }
-          return '';
+          return null;
         },
         keyboardType: inputType,
         obscureText: obscureText,

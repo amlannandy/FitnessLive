@@ -18,18 +18,17 @@ class _InitScreenState extends State<InitScreen> {
       FirebaseUser currentUser = await FirebaseAuth.instance.currentUser();
       if (currentUser == null) {
         _redirect = true;
-        _redirectURL = "/login";
+        _redirectURL = '/login';
         return true;
       }
-      UserDatabaseService databaseService = UserDatabaseService();
-      User user = await databaseService.getUser(currentUser.uid);
+      UserDatabaseService userDatabaseService = UserDatabaseService();
+      User user = await userDatabaseService.getUser(currentUser.uid);
       if (user == null) {
         _redirect = true;
-        _redirectURL = "/userinfo";
-        print('dh');
+        _redirectURL = '/userinfo';
         return true;
       }
-      _redirectURL = "/home";
+      _redirectURL = '/home';
       _redirect = true;
       return true;
     } catch (err) {
