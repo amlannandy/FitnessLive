@@ -6,6 +6,7 @@ import './screens/InitScreen.dart';
 import './screens/HomeScreen.dart';
 import './screens/LoginScreen.dart';
 import './screens/UserInfoScreen.dart';
+import './screens/ProfileScreen.dart';
 
 void main() => runApp(MyApp());
 
@@ -45,6 +46,7 @@ class MyApp extends StatelessWidget {
           '/home': (ctx) => HomeScreen(),
           '/login': (ctx) => LoginScreen(),
           '/userinfo': (ctx) => UserInfoScreen(),
+          '/profile': (ctx) => ProfileScreen(),
         },
       ),
     );

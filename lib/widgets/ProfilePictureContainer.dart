@@ -8,7 +8,7 @@ class ProfilePictureContainer extends StatelessWidget {
   final File image;
   final Function callback;
 
-  ProfilePictureContainer(this.image, this.callback);
+  ProfilePictureContainer(this.image, this.callback, {String imageUrl});
 
   void _openUploadDialogModal(BuildContext context) {
     showModalBottomSheet(

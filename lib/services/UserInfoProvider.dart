@@ -53,6 +53,48 @@ class UserInfoProvider {
     }
   }
 
+  static void updateUserData({
+    GlobalKey<ScaffoldState> scaffoldKey,
+    String name,
+    String height,
+    String weight,
+    bool isDiabetic,
+    File imageFile,
+    String imageUrl,
+    Function toggleSwitching,
+    Function toggleEditing,
+    Function updateImage,
+  }) async {
+    try {
+      toggleSwitching();
+      FirebaseUser firebaseUser = await FirebaseAuth.instance.currentUser();
+      if (imageFile != null) {
+        imageUrl = await uploadImage(imageFile, firebaseUser.uid);
+        updateImage(imageUrl);
+      }
+      await _firestore
+          .collection('users')
+          .document(firebaseUser.uid)
+          .updateData({
+        'name': name,
+        'imageUrl': imageUrl,
+        'height': double.parse(height),
+        'weight': double.parse(weight),
+        'isDiabetic': isDiabetic,
+      });
+      toggleSwitching();
+      toggleEditing();
+      UtilityService.showSnackBar(
+        scaffoldKey,
+        'Profile updated',
+        bodyColor: Colors.green,
+      );
+    } catch (error) {
+      toggleSwitching();
+      UtilityService.showSnackBar(scaffoldKey, error.message);
+    }
+  }
+
   static Future<String> uploadImage(File imageFile, String userId) async {
     StorageReference firebaseStorageRef = FirebaseStorage.instance
         .ref()

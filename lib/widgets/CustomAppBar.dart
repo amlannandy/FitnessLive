@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   final String title;
+  final IconButton iconButton;
 
-  CustomAppBar(this.title);
+  CustomAppBar(this.title, {this.iconButton});
 
   @override
   Size get preferredSize => Size.fromHeight(kToolbarHeight);
@@ -19,16 +20,19 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
         ),
         onPressed: () => Navigator.of(context).pop(),
       ),
+      centerTitle: true,
       backgroundColor: Colors.white,
       title: Text(
         title,
         style: TextStyle(
           color: Colors.black.withOpacity(0.8),
           fontFamily: 'Lato',
-          fontSize: 18,
-          fontWeight: FontWeight.bold,
+          fontSize: 22,
         ),
       ),
+      actions: [
+        iconButton ?? Container(),
+      ],
     );
   }
 }

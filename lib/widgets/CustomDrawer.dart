@@ -15,7 +15,7 @@ class CustomDrawer extends StatelessWidget {
             LineIcons.user,
             'Your Profile',
             'View and edit your profile',
-            () => Navigator.of(context).pushNamed('/pedometer'),
+            () => Navigator.of(context).pushNamed('/profile'),
           ),
           customListTile(
             LineIcons.comment_o,
