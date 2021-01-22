@@ -18,21 +18,15 @@ class CustomDrawer extends StatelessWidget {
             () => Navigator.of(context).pushNamed('/profile'),
           ),
           customListTile(
+            LineIcons.history,
+            'Medical History',
+            'View your health records',
+            () => Navigator.of(context).pushNamed('/pedometer'),
+          ),
+          customListTile(
             LineIcons.comment_o,
-            'Health Chatbot',
-            'Consult an AI Assistant',
-            () => Navigator.of(context).pushNamed('/pedometer'),
-          ),
-          customListTile(
-            LineIcons.heart_o,
-            'Heart Rate Monitor',
-            'Monitor your pulse',
-            () => Navigator.of(context).pushNamed('/pedometer'),
-          ),
-          customListTile(
-            Icons.directions_walk,
-            'Pedometer',
-            'Check your daily activity',
+            'Health Record Form',
+            'Add a new health record',
             () => Navigator.of(context).pushNamed('/pedometer'),
           ),
           customListTile(

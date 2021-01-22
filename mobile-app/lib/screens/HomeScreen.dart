@@ -1,10 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:line_icons/line_icons.dart';
 import 'package:provider/provider.dart';
 
 import '../models/HealthData.dart';
 import '../widgets/HomeAppBar.dart';
 import '../widgets/CustomDrawer.dart';
+import '../widgets/CustomGridItem.dart';
 import '../services/UserDatabaseService.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -29,10 +31,66 @@ class HomeScreen extends StatelessWidget {
                   return Container();
                 }
                 final healthData = snapshot.data;
-                return Column(
-                  children: [
-                    Text(healthData.lastUpdated),
-                  ],
+                return Container(
+                  padding: const EdgeInsets.all(10),
+                  child: GridView(
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      childAspectRatio: 1,
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 10,
+                      crossAxisSpacing: 10,
+                    ),
+                    children: [
+                      CustomGridItem(
+                        title: 'Heart Rate',
+                        subtitle: '${healthData.data.heartRate} bpm',
+                        icon: LineIcons.heart_o,
+                        color: Colors.red,
+                      ),
+                      CustomGridItem(
+                        title: 'Body Temperature',
+                        subtitle: '${healthData.data.bodyTemperature} °C',
+                        icon: LineIcons.sun_o,
+                        color: Colors.orange,
+                      ),
+                      CustomGridItem(
+                        title: 'Glusoce',
+                        subtitle: '${healthData.data.glucose} mg/dL',
+                        icon: LineIcons.lightbulb_o,
+                        color: Colors.blue,
+                      ),
+                      CustomGridItem(
+                        title: 'Respiration',
+                        subtitle: '${healthData.data.respiration} bpm',
+                        icon: LineIcons.user,
+                        color: Colors.green,
+                      ),
+                      CustomGridItem(
+                        title: 'Blood Pressure',
+                        subtitle: healthData.data.bloodPressure,
+                        icon: LineIcons.flask,
+                        color: Colors.purple,
+                      ),
+                      CustomGridItem(
+                        title: 'O2 Saturation',
+                        subtitle: '${healthData.data.oxygenSaturation}%',
+                        icon: LineIcons.anchor,
+                        color: Colors.pink,
+                      ),
+                      CustomGridItem(
+                        title: 'Electro Cardiogram',
+                        subtitle: '${healthData.data.electroCradiogram} ms',
+                        icon: LineIcons.heart_o,
+                        color: Colors.blue[900],
+                      ),
+                      CustomGridItem(
+                        title: 'Steps walked',
+                        subtitle: '5431',
+                        icon: Icons.directions_walk,
+                        color: Colors.amber[900],
+                      ),
+                    ],
+                  ),
                 );
               },
             ),
