@@ -7,6 +7,7 @@ import '../models/HealthData.dart';
 import '../widgets/HomeAppBar.dart';
 import '../widgets/CustomDrawer.dart';
 import '../widgets/CustomGridItem.dart';
+import '../widgets/CustomLoadingSpinner.dart';
 import '../services/UserDatabaseService.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -25,9 +26,10 @@ class HomeScreen extends StatelessWidget {
               stream: userDatabaseService.streamHealthData(user.uid),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return CircularProgressIndicator();
+                  return customLoadingSpinner(
+                      message: 'Fetching wearable data...');
                 }
-                if (!snapshot.hasData) {
+                if (!snapshot.hasData || snapshot.hasError) {
                   return Container();
                 }
                 final healthData = snapshot.data;
@@ -79,13 +81,13 @@ class HomeScreen extends StatelessWidget {
                       ),
                       CustomGridItem(
                         title: 'Electro Cardiogram',
-                        subtitle: '${healthData.data.electroCradiogram} ms',
+                        subtitle: '${healthData.data.electroCardiogram} ms',
                         icon: LineIcons.heart_o,
                         color: Colors.blue[900],
                       ),
                       CustomGridItem(
                         title: 'Steps walked',
-                        subtitle: '5431',
+                        subtitle: healthData.data.steps.toString(),
                         icon: Icons.directions_walk,
                         color: Colors.amber[900],
                       ),

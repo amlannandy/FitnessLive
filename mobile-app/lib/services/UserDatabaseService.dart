@@ -38,7 +38,7 @@ class UserDatabaseService {
     final res = await _httpClient.get(URL);
     final data = jsonDecode(res.body);
     final healthData = HealthData.fromJSON(data['data']);
-    //updateHealthDataOnFirestore(userId, healthData);
+    updateHealthDataOnFirestore(userId, healthData);
     return healthData;
   }
 
@@ -48,6 +48,12 @@ class UserDatabaseService {
       'data': {
         'bloodPressure': healthData.data.bloodPressure,
         'bodyTemperature': healthData.data.bodyTemperature,
+        'electroCardiogram': healthData.data.electroCardiogram,
+        'glucose': healthData.data.glucose,
+        'heartRate': healthData.data.heartRate,
+        'oxygenSaturation': healthData.data.oxygenSaturation,
+        'respiration': healthData.data.respiration,
+        'steps': healthData.data.steps,
       },
     });
   }

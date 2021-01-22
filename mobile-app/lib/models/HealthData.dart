@@ -20,7 +20,8 @@ class HealthData {
         bodyTemperature: data['data']['bodyTemperature'],
         respiration: data['data']['respiration'],
         oxygenSaturation: data['data']['oxygenSaturation'],
-        electroCradiogram: data['data']['electroCradiogram'],
+        electroCardiogram: data['data']['electroCardiogram'],
+        steps: data['data']['steps'],
       ),
     );
   }
@@ -33,7 +34,8 @@ class Data {
   final int bodyTemperature;
   final int respiration;
   final int oxygenSaturation;
-  final int electroCradiogram;
+  final int electroCardiogram;
+  final int steps;
 
   Data({
     @required this.heartRate,
@@ -42,6 +44,7 @@ class Data {
     @required this.bodyTemperature,
     @required this.respiration,
     @required this.oxygenSaturation,
-    @required this.electroCradiogram,
+    @required this.electroCardiogram,
+    @required this.steps,
   });
 }
