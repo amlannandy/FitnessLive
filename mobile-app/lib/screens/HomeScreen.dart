@@ -25,6 +25,9 @@ class HomeScreen extends StatelessWidget {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return CircularProgressIndicator();
                 }
+                if (!snapshot.hasData) {
+                  return Container();
+                }
                 final healthData = snapshot.data;
                 return Column(
                   children: [

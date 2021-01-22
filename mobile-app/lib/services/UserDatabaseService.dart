@@ -27,9 +27,11 @@ class UserDatabaseService {
   }
 
   Stream<HealthData> streamHealthData(String userId) async* {
-    yield* Stream.periodic(Duration(seconds: 30), (_) {
-      return getHealthData(userId);
-    }).asyncMap((value) async => await value);
+    while (true) {
+      HealthData healthData = await getHealthData(userId);
+      yield healthData;
+      await Future.delayed(Duration(seconds: 30));
+    }
   }
 
   Future<HealthData> getHealthData(String userId) async {
