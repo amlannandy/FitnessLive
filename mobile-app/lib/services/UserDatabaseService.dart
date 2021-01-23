@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:fitness_live/models/HealthRecord.dart';
 import 'package:http/http.dart' as http;
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -24,6 +25,16 @@ class UserDatabaseService {
         .document(id)
         .snapshots()
         .map((snapshot) => User.fromFirestore(snapshot));
+  }
+
+  Stream<List<HealthRecord>> streamAllHealthRecords(String userId) {
+    return _db
+        .collection('healthRecords')
+        .where('userId', isEqualTo: userId)
+        .snapshots()
+        .map((list) => list.documents
+            .map((snapshot) => HealthRecord.fromFirestore(snapshot))
+            .toList());
   }
 
   Stream<HealthData> streamHealthData(String userId) async* {

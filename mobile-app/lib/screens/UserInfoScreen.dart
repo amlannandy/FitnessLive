@@ -15,8 +15,8 @@ class UserInfoScreen extends StatefulWidget {
 class _UserInfoScreenState extends State<UserInfoScreen> {
   int _stepIndex = 0;
   bool _isLoading = false;
-  final _formKey = new GlobalKey<FormState>();
-  final _scaffoldKey = new GlobalKey<ScaffoldState>();
+  final _formKey = GlobalKey<FormState>();
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   String _gender = 'male';
   bool _isDiabetic = false;

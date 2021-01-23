@@ -5,8 +5,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import './screens/InitScreen.dart';
 import './screens/HomeScreen.dart';
 import './screens/LoginScreen.dart';
-import './screens/UserInfoScreen.dart';
 import './screens/ProfileScreen.dart';
+import './screens/UserInfoScreen.dart';
+import './screens/MedicalHistroyScreen.dart';
+import './screens/AddHealthRecordScreen.dart';
 
 void main() => runApp(MyApp());
 
@@ -47,6 +49,8 @@ class MyApp extends StatelessWidget {
           '/login': (ctx) => LoginScreen(),
           '/userinfo': (ctx) => UserInfoScreen(),
           '/profile': (ctx) => ProfileScreen(),
+          '/medicalhistory': (ctx) => MedicalHistoryScreen(),
+          '/addhealthrecord': (ctx) => AddHealthRecordScreen(),
         },
       ),
     );
