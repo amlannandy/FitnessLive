@@ -1,9 +1,12 @@
 import React from 'react';
 
+import Login from './views/Login';
+import Register from './views/Register';
+
 const App = () => {
   return (
     <div>
-      <h1>Hello World</h1>
+      <Login />
     </div>
   );
 };
