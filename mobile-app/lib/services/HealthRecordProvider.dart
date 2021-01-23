@@ -43,6 +43,12 @@ class HealthRecordProvider {
     }
   }
 
+  static void deleteHealthRecord(BuildContext context, String recordId) async {
+    await _db.collection('healthRecords').document(recordId).delete();
+    Navigator.of(context).pop();
+    Navigator.of(context).pop();
+  }
+
   static Future<Timestamp> getPickedDate(BuildContext context) async {
     DateTime dateTime = await showDatePicker(
       context: context,
