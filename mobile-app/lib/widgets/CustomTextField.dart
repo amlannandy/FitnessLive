@@ -47,11 +47,11 @@ class CustomTextField extends StatelessWidget {
           ),
           prefixIcon: Icon(
             icon,
-            color: Theme.of(context).accentColor.withOpacity(0.9),
+            color: Theme.of(context).accentColor.withOpacity(0.7),
           ),
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
-              color: Theme.of(context).accentColor,
+              color: Theme.of(context).accentColor.withOpacity(0.7),
               width: 1,
             ),
             borderRadius: BorderRadius.circular(15),

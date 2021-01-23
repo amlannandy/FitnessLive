@@ -32,7 +32,8 @@ class User {
       name: data['name'] ?? null,
       email: data['email'] ?? null,
       phone: data['phone'] ?? null,
-      imageUrl: data['imageUrl'] ?? null,
+      imageUrl: data['imageUrl'] ??
+          'https://i.pinimg.com/originals/51/f6/fb/51f6fb256629fc755b8870c801092942.png',
       age: data['age'] ?? null,
       height: data['height'] ?? null,
       weight: data['weight'] ?? null,

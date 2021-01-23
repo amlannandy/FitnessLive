@@ -69,10 +69,10 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
         key: _formKey,
         child: Theme(
           data: ThemeData(
-            primaryColor: Color(0xff8074F3),
-            accentColor: Color(0xff937FF1),
+            primaryColor: Colors.black,
+            accentColor: Colors.black,
             canvasColor: Colors.white,
-            colorScheme: ColorScheme.light(primary: Color(0xff8074F3)),
+            colorScheme: ColorScheme.light(primary: Colors.black),
           ),
           child: Stepper(
             type: StepperType.horizontal,
@@ -127,7 +127,11 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
         ),
         isActive: _stepIndex == 1,
         content: _isLoading
-            ? Center(child: CircularProgressIndicator())
+            ? Container(
+                height: 300,
+                alignment: Alignment.center,
+                child: CircularProgressIndicator(),
+              )
             : HealthInfoStep(
                 ageController: _ageController,
                 heightController: _heightController,

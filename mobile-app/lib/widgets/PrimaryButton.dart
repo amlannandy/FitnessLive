@@ -26,7 +26,7 @@ class PrimaryButton extends StatelessWidget {
         child: RaisedButton(
           padding: const EdgeInsets.all(12.5),
           onPressed: onPress,
-          color: color ?? Theme.of(context).primaryColor,
+          color: color ?? Theme.of(context).primaryColor.withOpacity(0.8),
           child: Text(
             text,
             style: TextStyle(

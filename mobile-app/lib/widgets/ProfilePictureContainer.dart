@@ -30,14 +30,23 @@ class ProfilePictureContainer extends StatelessWidget {
         alignment: Alignment.bottomRight,
         children: [
           image == null
-              ? CircleAvatar(
-                  radius: 70,
-                  child: Icon(
-                    LineIcons.user,
-                    color: Colors.white,
-                    size: 60,
+              ? Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Theme.of(context).accentColor.withOpacity(0.8),
+                      width: 0.8,
+                    ),
+                    shape: BoxShape.circle,
                   ),
-                  backgroundColor: Theme.of(context).accentColor,
+                  child: CircleAvatar(
+                    radius: 70,
+                    child: Icon(
+                      LineIcons.user,
+                      color: Theme.of(context).accentColor.withOpacity(0.8),
+                      size: 60,
+                    ),
+                    backgroundColor: Colors.white,
+                  ),
                 )
               : CircleAvatar(
                   radius: 70,

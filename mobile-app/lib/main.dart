@@ -24,8 +24,8 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'FitnessLive',
         theme: ThemeData(
-          primaryColor: Color(0xff8074F3),
-          accentColor: Color(0xff937FF1),
+          primaryColor: Colors.black,
+          accentColor: Colors.black,
           textTheme: TextTheme(
             headline1: TextStyle(
               color: Colors.white.withOpacity(0.9),
