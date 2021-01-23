@@ -4,7 +4,7 @@ import 'package:line_icons/line_icons.dart';
 import '../widgets/Background.dart';
 import '../widgets/PrimaryButton.dart';
 import '../widgets/CustomTextField.dart';
-import '../widgets/CustomProgressBar.dart';
+import '../widgets/CustomLoadingSpinner.dart';
 import '../services/FirebaseAuthenticationService.dart';
 
 enum AuthMode {
@@ -70,10 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
         children: [
           ...getBackground(context),
           _isLoading
-              ? Center(
-                  child: CustomProgressBar(
-                  message: 'Authenticating...',
-                ))
+              ? customLoadingSpinner(message: 'Authenticating...')
               : Form(
                   key: _formKey,
                   child: Column(
@@ -112,6 +109,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             return 'Passwords don\'t match';
                           }
                         },
+                        obscureText: true,
                       ),
                       _authMode == AuthMode.Login
                           ? Container()
@@ -126,6 +124,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   return 'Passwords don\'t match';
                                 }
                               },
+                              obscureText: true,
                             ),
                       PrimaryButton(
                         text:

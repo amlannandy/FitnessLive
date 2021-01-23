@@ -20,6 +20,7 @@ dependencies:
   line_icons: ^0.2.0
   path: ^1.6.4
   provider: ^4.0.4
+  shimmer: ^1.1.2
   toggle_switch: ^0.1.8
 
   cupertino_icons: ^1.0.0

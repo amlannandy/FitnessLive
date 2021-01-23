@@ -55,7 +55,7 @@ class _InitScreenState extends State<InitScreen> {
                 Padding(
                   padding: const EdgeInsets.all(30),
                   child: Text(
-                    "FitnessLive",
+                    "Fitness Live",
                     style: TextStyle(
                       color: Colors.black,
                       fontFamily: 'Lato',

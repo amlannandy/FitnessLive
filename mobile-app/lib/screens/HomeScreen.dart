@@ -6,8 +6,9 @@ import 'package:provider/provider.dart';
 import '../models/HealthData.dart';
 import '../widgets/HomeAppBar.dart';
 import '../widgets/CustomDrawer.dart';
+import '../widgets/ErrorMessage.dart';
 import '../widgets/CustomGridItem.dart';
-import '../widgets/CustomLoadingSpinner.dart';
+import '../widgets/CustomListShimmer.dart';
 import '../services/UserDatabaseService.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -26,11 +27,13 @@ class HomeScreen extends StatelessWidget {
               stream: userDatabaseService.streamHealthData(user.uid),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return customLoadingSpinner(
-                      message: 'Fetching wearable data...');
+                  return customListShimmer(15);
                 }
                 if (!snapshot.hasData || snapshot.hasError) {
-                  return Container();
+                  return errorMessage(
+                    context,
+                    message: 'Couldn\'t connect to Tracker',
+                  );
                 }
                 final healthData = snapshot.data;
                 return Container(
