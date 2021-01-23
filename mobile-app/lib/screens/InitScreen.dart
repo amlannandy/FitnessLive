@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import '../models/User.dart';
+import '../widgets/Background.dart';
 import '../services/UserDatabaseService.dart';
 
 class InitScreen extends StatefulWidget {
@@ -42,18 +43,13 @@ class _InitScreenState extends State<InitScreen> {
       body: Stack(
         alignment: Alignment.center,
         children: [
-          Image.asset(
-            'assets/images/background.png',
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
-            fit: BoxFit.cover,
-          ),
           Container(
+            color: Colors.transparent,
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
             alignment: Alignment.center,
-            width: double.infinity,
-            color: Colors.white.withOpacity(0.95),
-            height: 200,
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Padding(
@@ -96,7 +92,7 @@ class _InitScreenState extends State<InitScreen> {
                     );
                   },
                 ),
-                LinearProgressIndicator(
+                CircularProgressIndicator(
                   backgroundColor: Colors.grey[200],
                   valueColor: AlwaysStoppedAnimation<Color>(
                     Theme.of(context).primaryColor,
@@ -115,6 +111,7 @@ class _InitScreenState extends State<InitScreen> {
               ],
             ),
           ),
+          ...getBackground(context),
         ],
       ),
     );
