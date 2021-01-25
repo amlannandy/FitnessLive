@@ -1,13 +1,27 @@
-import React from 'react';
+import React, { Fragment, useEffect } from 'react';
+import { Provider } from 'react-redux';
+import { BrowserRouter as Router } from 'react-router-dom';
 
-import Login from './views/Login';
-import Register from './views/Register';
+import store from './store/store';
+import Routes from './routes/Routes';
+import CustomAlert from './components/CustomAlert';
+
+import { loadUser } from './store/actions/auth';
 
 const App = () => {
+  useEffect(() => {
+    store.dispatch(loadUser());
+  }, []);
+
   return (
-    <div>
-      <Login />
-    </div>
+    <Provider store={store}>
+      <Router>
+        <Fragment>
+          <CustomAlert />
+          <Routes />
+        </Fragment>
+      </Router>
+    </Provider>
   );
 };
 
