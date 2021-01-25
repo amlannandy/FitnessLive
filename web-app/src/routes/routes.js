@@ -11,7 +11,7 @@ import PageNotFound from '../views/PageNotFound';
 const Routes = () => {
   return (
     <Switch>
-      <PrivateRoute exact path='/' component={Home} />
+      <PrivateRoute path='/' component={Home} />
       <Route exact path='/login' component={Login} />
       <Route exact path='/register' component={Register} />
       <Route component={PageNotFound} />
