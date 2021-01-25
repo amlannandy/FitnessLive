@@ -10,6 +10,7 @@ import {
   makeStyles,
 } from '@material-ui/core';
 import { Redirect } from 'react-router-dom';
+import RouterLink from 'react-router-dom/Link';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { login } from '../store/actions/auth';
@@ -100,11 +101,13 @@ const Login = () => {
             color='primary'
             disabled={isLoading}
             className={classes.submit}>
-            Register
+            Login
           </Button>
           <Grid container justify='flex-end'>
             <Grid item>
-              <Link variant='body2'>New user? Register here</Link>
+              <Link component={RouterLink} to='/register' variant='body2'>
+                New user? Register here
+              </Link>
             </Grid>
           </Grid>
         </form>

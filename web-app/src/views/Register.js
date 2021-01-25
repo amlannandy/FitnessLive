@@ -10,6 +10,7 @@ import {
   makeStyles,
 } from '@material-ui/core';
 import { Redirect } from 'react-router-dom';
+import RouterLink from 'react-router-dom/Link';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { setAlert } from '../store/actions/alert';
@@ -156,7 +157,7 @@ const Register = () => {
           </Button>
           <Grid container justify='flex-end'>
             <Grid item>
-              <Link href='#' variant='body2'>
+              <Link component={RouterLink} to='/login' variant='body2'>
                 Already have an account? Login
               </Link>
             </Grid>
