@@ -19,7 +19,7 @@ export const login = (email, password) => async dispatch => {
     });
     const data = await res.json();
     if (data.success) {
-      const { token, user } = data;
+      const { token, user } = data.data;
       localStorage.setItem('fitness-live-token', token);
       dispatch({ type: AUTHENTICATE, payload: { user, token } });
     } else {
@@ -50,7 +50,7 @@ export const register = (name, email, password) => async dispatch => {
     });
     const data = await res.json();
     if (data.success) {
-      const { token, user } = data;
+      const { token, user } = data.data;
       localStorage.setItem('fitness-live-token', token);
       dispatch({ type: AUTHENTICATE, payload: { user, token } });
     } else {
@@ -85,7 +85,7 @@ export const loadUser = () => async dispatch => {
     });
     const data = await res.json();
     if (data.success) {
-      const { token, user } = data;
+      const { token, user } = data.data;
       localStorage.setItem('fitness-live-token', token);
       dispatch({ type: AUTHENTICATE, payload: { user, token } });
     } else {
