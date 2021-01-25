@@ -16,7 +16,6 @@ import {
   AppBar,
   Drawer,
   CssBaseline,
-  Button,
 } from '@material-ui/core';
 import {
   Dashboard,
@@ -188,7 +187,7 @@ const Home = ({ match: { url } }) => {
             </ListItemIcon>
             <ListItemText primary='Employees' />
           </ListItem>
-          <ListItem button component={Button} onClick={logoutHandler}>
+          <ListItem button onClick={logoutHandler}>
             <ListItemIcon>
               <ExitToApp />
             </ListItemIcon>
