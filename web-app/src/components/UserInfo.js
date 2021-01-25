@@ -6,6 +6,7 @@ const useStyles = makeStyles(() => ({
   avatar: {
     height: 100,
     width: 100,
+    backgroundColor: '#b31e6f',
   },
 }));
 
