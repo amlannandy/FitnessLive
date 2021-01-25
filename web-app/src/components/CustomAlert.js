@@ -11,7 +11,7 @@ const CustomAlert = () => {
 
   return alerts.map(alert => (
     <Alert key={alert.id} variant='filled' severity={alert.type}>
-      {alert.message}
+      {alert.msg}
     </Alert>
   ));
 };

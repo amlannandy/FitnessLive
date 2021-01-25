@@ -25,7 +25,7 @@ export const login = (email, password) => async dispatch => {
     } else {
       const errors = data.errors;
       errors.forEach(error => {
-        dispatch(setAlert(error.msg, 'danger'));
+        dispatch(setAlert(error.msg, 'error'));
       });
       dispatch({ type: TOGGLE_AUTH_LOADING });
     }
@@ -33,7 +33,7 @@ export const login = (email, password) => async dispatch => {
     console.log(error);
     const errors = error.data.errors;
     errors.forEach(error => {
-      dispatch(setAlert(error.msg, 'danger'));
+      dispatch(setAlert(error.msg, 'error'));
     });
     dispatch({ type: TOGGLE_AUTH_LOADING });
   }
@@ -56,7 +56,7 @@ export const register = (name, email, password) => async dispatch => {
     } else {
       const errors = data.errors;
       errors.forEach(error => {
-        dispatch(setAlert(error.msg, 'danger'));
+        dispatch(setAlert(error.msg, 'error'));
       });
       dispatch({ type: TOGGLE_AUTH_LOADING });
     }
@@ -64,7 +64,7 @@ export const register = (name, email, password) => async dispatch => {
     console.log(error);
     const errors = error.data.errors;
     errors.forEach(error => {
-      dispatch(setAlert(error.msg, 'danger'));
+      dispatch(setAlert(error.msg, 'error'));
     });
     dispatch({ type: TOGGLE_AUTH_LOADING });
   }
@@ -89,18 +89,10 @@ export const loadUser = () => async dispatch => {
       localStorage.setItem('fitness-live-token', token);
       dispatch({ type: AUTHENTICATE, payload: { user, token } });
     } else {
-      const errors = data.errors;
-      errors.forEach(error => {
-        dispatch(setAlert(error.msg, 'danger'));
-      });
       dispatch({ type: TOGGLE_AUTH_LOADING });
     }
   } catch (error) {
     console.log(error);
-    const errors = error.data.errors;
-    errors.forEach(error => {
-      dispatch(setAlert(error.msg, 'danger'));
-    });
     dispatch({ type: TOGGLE_AUTH_LOADING });
   }
 };

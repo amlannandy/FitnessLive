@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useReducer } from 'react';
 import {
   Button,
   CssBaseline,
@@ -9,6 +9,10 @@ import {
   Container,
   makeStyles,
 } from '@material-ui/core';
+import { Redirect } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+
+import { login } from '../store/actions/auth';
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -26,8 +30,30 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const Register = () => {
+const formReducer = (state, action) => {
+  return {
+    ...state,
+    [action.target.name]: action.target.value,
+  };
+};
+
+const Login = () => {
+  const dispatch = useDispatch();
   const classes = useStyles();
+
+  const initialFormData = { email: '', password: '' };
+  const { isLoading, isAuthenticated } = useSelector(state => state.auth);
+  const [formData, setFormData] = useReducer(formReducer, initialFormData);
+
+  const loginHandler = e => {
+    e.preventDefault();
+    const { email, password } = formData;
+    dispatch(login(email, password));
+  };
+
+  if (!isLoading && isAuthenticated) {
+    return <Redirect to='/' />;
+  }
 
   return (
     <Container component='main' maxWidth='xs'>
@@ -36,17 +62,20 @@ const Register = () => {
         <Typography component='h1' variant='h2'>
           Login
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} onSubmit={loginHandler}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
                 variant='outlined'
+                type='email'
                 required
                 fullWidth
                 id='email'
                 label='Email Address'
                 name='email'
                 autoComplete='email'
+                disabled={isLoading}
+                onChange={setFormData}
               />
             </Grid>
             <Grid item xs={12}>
@@ -59,6 +88,8 @@ const Register = () => {
                 type='password'
                 id='password'
                 autoComplete='current-password'
+                disabled={isLoading}
+                onChange={setFormData}
               />
             </Grid>
           </Grid>
@@ -67,14 +98,13 @@ const Register = () => {
             fullWidth
             variant='contained'
             color='primary'
+            disabled={isLoading}
             className={classes.submit}>
             Register
           </Button>
           <Grid container justify='flex-end'>
             <Grid item>
-              <Link href='#' variant='body2'>
-                New user? Register here
-              </Link>
+              <Link variant='body2'>New user? Register here</Link>
             </Grid>
           </Grid>
         </form>
@@ -83,4 +113,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default Login;
