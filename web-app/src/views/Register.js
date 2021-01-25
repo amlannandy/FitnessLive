@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useReducer } from 'react';
 import {
   Button,
   CssBaseline,
@@ -9,6 +9,11 @@ import {
   Container,
   makeStyles,
 } from '@material-ui/core';
+import { Redirect } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+
+import { setAlert } from '../store/actions/alert';
+import { register } from '../store/actions/auth';
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -26,8 +31,40 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+const formReducer = (state, action) => {
+  return {
+    ...state,
+    [action.target.name]: action.target.value,
+  };
+};
+
 const Register = () => {
+  const dispatch = useDispatch();
   const classes = useStyles();
+
+  const initialFormData = {
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+  };
+  const { isLoading, isAuthenticated } = useSelector(state => state.auth);
+  const [formData, setFormData] = useReducer(formReducer, initialFormData);
+
+  const registerHandler = e => {
+    e.preventDefault();
+    const { firstName, lastName, email, password, confirmPassword } = formData;
+    if (password !== confirmPassword) {
+      dispatch(setAlert("Passwords don't match", 'error'));
+      return;
+    }
+    dispatch(register(`${firstName} ${lastName}`, email, password));
+  };
+
+  if (!isLoading && isAuthenticated) {
+    return <Redirect to='/' />;
+  }
 
   return (
     <Container component='main' maxWidth='xs'>
@@ -36,7 +73,7 @@ const Register = () => {
         <Typography component='h1' variant='h2'>
           Register
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} onSubmit={registerHandler}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
@@ -48,6 +85,8 @@ const Register = () => {
                 id='firstName'
                 label='First Name'
                 autoFocus
+                disabled={isLoading}
+                onChange={setFormData}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -59,17 +98,22 @@ const Register = () => {
                 label='Last Name'
                 name='lastName'
                 autoComplete='lname'
+                disabled={isLoading}
+                onChange={setFormData}
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
                 variant='outlined'
+                type='email'
                 required
                 fullWidth
                 id='email'
                 label='Email Address'
                 name='email'
                 autoComplete='email'
+                disabled={isLoading}
+                onChange={setFormData}
               />
             </Grid>
             <Grid item xs={12}>
@@ -82,6 +126,8 @@ const Register = () => {
                 type='password'
                 id='password'
                 autoComplete='current-password'
+                disabled={isLoading}
+                onChange={setFormData}
               />
             </Grid>
             <Grid item xs={12}>
@@ -89,11 +135,13 @@ const Register = () => {
                 variant='outlined'
                 required
                 fullWidth
-                name='password'
+                name='confirmPassword'
                 label='Confirm Password'
                 type='password'
-                id='password'
+                id='confirmPassword'
                 autoComplete='current-password'
+                disabled={isLoading}
+                onChange={setFormData}
               />
             </Grid>
           </Grid>
@@ -102,6 +150,7 @@ const Register = () => {
             fullWidth
             variant='contained'
             color='primary'
+            disabled={isLoading}
             className={classes.submit}>
             Register
           </Button>
