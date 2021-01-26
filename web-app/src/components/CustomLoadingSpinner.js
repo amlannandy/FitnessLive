@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  Box,
   Container,
   Typography,
   CircularProgress,
@@ -21,9 +22,11 @@ const CustomLoadingSpinner = ({ message = 'Loading...' }) => {
   return (
     <Container component='main' maxWidth='xs'>
       <div className={classes.paper}>
-        <CircularProgress />
-        <Typography component='h1' variant='h2'>
-          {{ message }}
+        <Box m={2}>
+          <CircularProgress />
+        </Box>
+        <Typography component='h1' variant='body1'>
+          {message}
         </Typography>
       </div>
     </Container>

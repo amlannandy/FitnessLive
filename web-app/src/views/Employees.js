@@ -12,7 +12,11 @@ const Employees = () => {
     if (employees.length === 0) {
       dispatch(fetchEmployees());
     }
-  }, []);
+  }, [dispatch, employees]);
+
+  if (isLoading) {
+    return <CustomLoadingSpinner />;
+  }
 
   return (
     <div>
