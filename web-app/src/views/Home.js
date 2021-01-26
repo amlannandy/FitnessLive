@@ -20,6 +20,7 @@ import {
 import {
   Dashboard,
   People,
+  NoteOutlined,
   ExitToApp,
   ChevronLeft,
   Menu,
@@ -186,6 +187,12 @@ const Home = ({ match: { url } }) => {
               <People />
             </ListItemIcon>
             <ListItemText primary='Employees' />
+          </ListItem>
+          <ListItem button component={Link} to='/employees'>
+            <ListItemIcon>
+              <NoteOutlined />
+            </ListItemIcon>
+            <ListItemText primary='Records' />
           </ListItem>
           <ListItem button onClick={logoutHandler}>
             <ListItemIcon>
