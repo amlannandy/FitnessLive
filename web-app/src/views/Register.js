@@ -9,9 +9,8 @@ import {
   Container,
   makeStyles,
 } from '@material-ui/core';
-import { Redirect } from 'react-router-dom';
-import RouterLink from 'react-router-dom/Link';
 import { useSelector, useDispatch } from 'react-redux';
+import { Redirect, Link as RouterLink } from 'react-router-dom';
 
 import { setAlert } from '../store/actions/alert';
 import { register } from '../store/actions/auth';
