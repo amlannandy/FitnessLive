@@ -8,7 +8,7 @@ const generateHealthData = () => {
       bodyTemperature: getRandomInt(30, 40),
       respiration: getRandomInt(10, 17),
       oxygenSaturation: getRandomInt(90, 100),
-      electroCardiogram: getRandomInt(120, 200),
+      electroCardiogram: getRandomInt(100, 200),
       steps: getRandomInt(1000, 5000),
     },
   };
