@@ -6,6 +6,9 @@ const User = require('../models/User');
 
 const router = express.Router();
 
+// @description   Get current logged in user
+// @route         GET /api/v1/auth
+// @access        Private
 router.get('/', async (req, res) => {
   try {
     let token;
@@ -50,6 +53,9 @@ router.get('/', async (req, res) => {
   }
 });
 
+// @description   Log in existing user
+// @route         POST /api/v1/auth/login
+// @access        Public
 router.post(
   '/login',
   [
@@ -95,6 +101,9 @@ router.post(
   }
 );
 
+// @description   Register new user
+// @route         POST /api/v1/auth/register
+// @access        Public
 router.post(
   '/register',
   [
