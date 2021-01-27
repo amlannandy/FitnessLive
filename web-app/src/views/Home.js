@@ -188,7 +188,7 @@ const Home = ({ match: { url } }) => {
             </ListItemIcon>
             <ListItemText primary='Employees' />
           </ListItem>
-          <ListItem button component={Link} to='/employees'>
+          <ListItem button component={Link} to='/records'>
             <ListItemIcon>
               <NoteOutlined />
             </ListItemIcon>

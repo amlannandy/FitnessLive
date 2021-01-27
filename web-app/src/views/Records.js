@@ -14,7 +14,7 @@ import {
 } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { fetchEmployees } from '../store/actions/employees';
+import { fetchRecords } from '../store/actions/records';
 import CustomLoadingSpinner from '../components/CustomLoadingSpinner';
 
 const useStyles = makeStyles(theme => ({
@@ -30,16 +30,16 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const Employees = () => {
+const Records = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const { employees, isLoading } = useSelector(state => state.employees);
+  const { records, isLoading } = useSelector(state => state.records);
 
   useEffect(() => {
-    if (employees.length === 0) {
-      dispatch(fetchEmployees());
+    if (records.length === 0) {
+      dispatch(fetchRecords());
     }
-  }, [dispatch, employees]);
+  }, [dispatch, records]);
 
   if (isLoading) {
     return <CustomLoadingSpinner />;
@@ -64,19 +64,19 @@ const Employees = () => {
               <TableCell>No.</TableCell>
               <TableCell align='left'>Name</TableCell>
               <TableCell align='left'>Username</TableCell>
-              <TableCell align='left'>Email Address</TableCell>
+              <TableCell align='left'>Problem</TableCell>
               <TableCell align='left'>Details</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {employees.map((employee, index) => (
-              <TableRow key={employee.email}>
+            {records.map((record, index) => (
+              <TableRow key={record.email}>
                 <TableCell component='th' scope='row'>
                   {index + 1}
                 </TableCell>
-                <TableCell align='left'>{employee.name}</TableCell>
-                <TableCell align='left'>{employee.username}</TableCell>
-                <TableCell align='left'>{employee.email}</TableCell>
+                <TableCell align='left'>{record.name}</TableCell>
+                <TableCell align='left'>{record.username}</TableCell>
+                <TableCell align='left'>{record.title}</TableCell>
                 <TableCell align='left'>
                   <Button size='small' variant='outlined' color='secondary'>
                     Details
@@ -91,4 +91,4 @@ const Employees = () => {
   );
 };
 
-export default Employees;
+export default Records;
