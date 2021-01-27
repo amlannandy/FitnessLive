@@ -17,6 +17,7 @@ class HomeAppBar extends StatelessWidget with PreferredSizeWidget {
     final user = Provider.of<FirebaseUser>(context);
 
     return Container(
+      height: MediaQuery.of(context).size.height * 0.15,
       padding: const EdgeInsets.fromLTRB(15, 45, 10, 5),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
