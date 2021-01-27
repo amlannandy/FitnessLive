@@ -1,6 +1,7 @@
 const express = require('express');
 const { check, validationResult } = require('express-validator');
 
+const generateHealthData = require('../utils/generateHealthData');
 const generateTestResults = require('../utils/generateTestResults');
 
 const router = express.Router();

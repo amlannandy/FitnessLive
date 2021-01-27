@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 class User {
   final String id;
   final String name;
+  final String username;
   final String email;
   final String phone;
   final String imageUrl;
@@ -15,6 +16,7 @@ class User {
   const User({
     @required this.id,
     @required this.name,
+    @required this.username,
     @required this.email,
     @required this.phone,
     @required this.imageUrl,
@@ -30,6 +32,7 @@ class User {
     final user = User(
       id: snapshot.documentID,
       name: data['name'] ?? null,
+      username: data['username'] ?? null,
       email: data['email'] ?? null,
       phone: data['phone'] ?? null,
       imageUrl: data['imageUrl'] ??

@@ -7,7 +7,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '../models/User.dart';
 import '../models/HealthData.dart';
 
-const URL = 'http://192.168.0.151:5000';
+const URL = 'http://192.168.0.151:5000/api/v1';
 
 class UserDatabaseService {
   var _httpClient = http.Client();
@@ -46,7 +46,7 @@ class UserDatabaseService {
   }
 
   Future<HealthData> getHealthData(String userId) async {
-    final res = await _httpClient.get(URL);
+    final res = await _httpClient.get(URL + '/tracker');
     final data = jsonDecode(res.body);
     final healthData = HealthData.fromJSON(data['data']);
     updateHealthDataOnFirestore(userId, healthData);

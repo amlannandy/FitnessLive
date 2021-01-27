@@ -14,6 +14,7 @@ class UserInfoProvider {
   static void uploadUserData({
     GlobalKey<ScaffoldState> scaffoldKey,
     String name,
+    String username,
     String phone,
     String age,
     String gender,
@@ -36,6 +37,7 @@ class UserInfoProvider {
       }
       await _firestore.collection('users').document(firebaseUser.uid).setData({
         'name': name,
+        'username': username,
         'phone': phone,
         'email': firebaseUser.email,
         'imageUrl': imageUrl,

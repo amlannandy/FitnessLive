@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:toggle_switch/toggle_switch.dart';
@@ -29,12 +30,23 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
 
   void _switchLoading() => setState(() => _isLoading = !_isLoading);
 
-  void _submitData() {
+  Future<String> _generateUserName() async {
+    String username = _phoneController.text + '@';
+    FirebaseUser user = await FirebaseAuth.instance.currentUser();
+    String email = user.email;
+    username += email.split('@')[0];
+    return username;
+  }
+
+  void _submitData() async {
     final _form = _formKey.currentState;
+    String username = await _generateUserName();
+    print(username);
     if (_form.validate()) {
       UserInfoProvider.uploadUserData(
         scaffoldKey: _scaffoldKey,
         name: _nameController.text,
+        username: username,
         phone: _phoneController.text,
         image: _imageFile,
         age: _ageController.text,
@@ -168,6 +180,8 @@ class BasicInfoStep extends StatelessWidget {
         Column(
           children: [
             ProfilePictureContainer(image, callback),
+            SizedBox(height: 10),
+            Text('Username will be generated automatically'),
             SizedBox(height: 10),
             CustomTextField(
               controller: nameController,

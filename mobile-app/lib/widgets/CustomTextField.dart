@@ -8,6 +8,7 @@ class CustomTextField extends StatelessWidget {
   final TextInputType inputType;
   final bool isEnabled;
   final Function validations;
+  final bool validate;
 
   CustomTextField({
     @required this.controller,
@@ -17,6 +18,7 @@ class CustomTextField extends StatelessWidget {
     this.inputType = TextInputType.text,
     this.isEnabled = true,
     this.validations,
+    this.validate = true,
   });
 
   @override
@@ -27,15 +29,17 @@ class CustomTextField extends StatelessWidget {
         style: TextStyle(
           fontFamily: 'Varela',
         ),
-        validator: (text) {
-          if (text.isEmpty) {
-            return 'Field cannot be empty';
-          }
-          if (validations != null) {
-            return validations(text);
-          }
-          return null;
-        },
+        validator: !validate
+            ? null
+            : (text) {
+                if (text.isEmpty) {
+                  return 'Field cannot be empty';
+                }
+                if (validations != null) {
+                  return validations(text);
+                }
+                return null;
+              },
         keyboardType: inputType,
         obscureText: obscureText,
         controller: controller,
