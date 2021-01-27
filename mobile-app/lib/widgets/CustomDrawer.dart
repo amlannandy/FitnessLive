@@ -30,6 +30,12 @@ class CustomDrawer extends StatelessWidget {
             () => Navigator.of(context).pushNamed('/addhealthrecord'),
           ),
           customListTile(
+            LineIcons.google,
+            'Google Fit',
+            'Connect with fitness app',
+            () => Navigator.of(context).pushNamed('/googlefit'),
+          ),
+          customListTile(
             Icons.exit_to_app,
             'Log out',
             'Exit your account',
