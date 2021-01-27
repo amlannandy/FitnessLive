@@ -4,12 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import '../models/User.dart';
 import '../services/UtilityService.dart';
 import '../services/UserInfoProvider.dart';
+import '../services/UserDatabaseService.dart';
 
 class HealthRecordProvider {
   static Firestore _db = Firestore.instance;
   static final _auth = FirebaseAuth.instance;
+  static final _userDatabaseService = UserDatabaseService();
 
   static void uploadHealthRecord(
       {GlobalKey<ScaffoldState> scaffoldKey,
@@ -20,15 +23,19 @@ class HealthRecordProvider {
       Function toggleSwitching}) async {
     try {
       toggleSwitching();
-      FirebaseUser user = await _auth.currentUser();
-      String imageUrl = await UserInfoProvider.uploadImage(image, user.uid);
+      FirebaseUser firebaseUser = await _auth.currentUser();
+      User user = await _userDatabaseService.getUser(firebaseUser.uid);
+      String imageUrl =
+          await UserInfoProvider.uploadImage(image, firebaseUser.uid);
       await _db.collection('healthRecords').document().setData({
         'title': title,
         'subtitle': subtitle,
         'imageUrl': imageUrl,
         'dateIssued': dateIssued,
         'dateUploaded': Timestamp.now(),
-        'userId': user.uid,
+        'userId': firebaseUser.uid,
+        'username': user.username,
+        'name': user.name,
       });
       UtilityService.showSnackBar(
         scaffoldKey,
