@@ -4,6 +4,7 @@ import 'package:line_icons/line_icons.dart';
 
 import '../widgets/CustomAppBar.dart';
 import '../widgets/CustomGridItem.dart';
+import '../widgets/CustomListShimmer.dart';
 
 class GoogleFitScreen extends StatefulWidget {
   @override
@@ -11,6 +12,7 @@ class GoogleFitScreen extends StatefulWidget {
 }
 
 class _GoogleFitScreenState extends State<GoogleFitScreen> {
+  bool _isLoading = true;
   double _height = 175.4, _weight = 71.2, _distance = 4.56, _heartRate = 61;
 
   @override
@@ -34,34 +36,38 @@ class _GoogleFitScreenState extends State<GoogleFitScreen> {
   }
 
   void _getData() async {
-    final distanceData = await FitKit.read(
-      DataType.DISTANCE,
-      dateFrom: DateTime.now().subtract(Duration(days: 1)),
-      dateTo: DateTime.now(),
-      limit: 1,
-    );
-    setState(() => _distance = distanceData[0].value);
-    final heightData = await FitKit.read(
-      DataType.HEIGHT,
-      dateFrom: DateTime.now().subtract(Duration(days: 1)),
-      dateTo: DateTime.now(),
-      limit: 1,
-    );
-    setState(() => _height = heightData[0].value);
-    final weightData = await FitKit.read(
-      DataType.WEIGHT,
-      dateFrom: DateTime.now().subtract(Duration(days: 1)),
-      dateTo: DateTime.now(),
-      limit: 1,
-    );
-    setState(() => _weight = weightData[0].value);
-    final heartRateData = await FitKit.read(
-      DataType.HEART_RATE,
-      dateFrom: DateTime.now().subtract(Duration(days: 1)),
-      dateTo: DateTime.now(),
-      limit: 1,
-    );
-    setState(() => _heartRate = heartRateData[0].value);
+    try {
+      final distanceData = await FitKit.read(
+        DataType.DISTANCE,
+        dateFrom: DateTime.now().subtract(Duration(days: 1)),
+        dateTo: DateTime.now(),
+        limit: 1,
+      );
+      setState(() => _distance = distanceData[0].value);
+      final heightData = await FitKit.read(
+        DataType.HEIGHT,
+        dateFrom: DateTime.now().subtract(Duration(days: 1)),
+        dateTo: DateTime.now(),
+        limit: 1,
+      );
+      setState(() => _height = heightData[0].value);
+      final weightData = await FitKit.read(
+        DataType.WEIGHT,
+        dateFrom: DateTime.now().subtract(Duration(days: 1)),
+        dateTo: DateTime.now(),
+        limit: 1,
+      );
+      setState(() => _weight = weightData[0].value);
+      final heartRateData = await FitKit.read(
+        DataType.HEART_RATE,
+        dateFrom: DateTime.now().subtract(Duration(days: 1)),
+        dateTo: DateTime.now(),
+        limit: 1,
+      );
+      setState(() => _heartRate = heartRateData[0].value);
+    } catch (e) {
+      setState(() => _isLoading = false);
+    }
   }
 
   @override
@@ -69,64 +75,66 @@ class _GoogleFitScreenState extends State<GoogleFitScreen> {
     return Scaffold(
       appBar: CustomAppBar(''),
       backgroundColor: Colors.white,
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Image.asset(
-              'assets/images/googlefit.png',
-              height: 100,
-            ),
-            SizedBox(height: 15),
-            Text(
-              'Data for last 24 hours',
-              style: TextStyle(
-                color: Colors.black.withOpacity(0.7),
-                fontFamily: 'Varela',
-                fontSize: 14,
-              ),
-            ),
-            SizedBox(height: 15),
-            Container(
-              height: MediaQuery.of(context).size.height * 0.7,
-              padding: const EdgeInsets.all(15),
-              child: GridView(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  childAspectRatio: 1,
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 10,
-                  crossAxisSpacing: 10,
-                ),
+      body: _isLoading
+          ? customListShimmer(10)
+          : SingleChildScrollView(
+              child: Column(
                 children: [
-                  CustomGridItem(
-                    title: 'Heart Rate',
-                    subtitle: '${_heartRate.toStringAsFixed(0)} bpm',
-                    icon: LineIcons.heart_o,
-                    color: Colors.red,
+                  Image.asset(
+                    'assets/images/googlefit.png',
+                    height: 100,
                   ),
-                  CustomGridItem(
-                    title: 'Distance',
-                    subtitle: '${_distance.toStringAsFixed(2)} km',
-                    icon: Icons.directions_walk,
-                    color: Colors.yellow[700],
+                  SizedBox(height: 15),
+                  Text(
+                    'Data for last 24 hours',
+                    style: TextStyle(
+                      color: Colors.black.withOpacity(0.7),
+                      fontFamily: 'Varela',
+                      fontSize: 14,
+                    ),
                   ),
-                  CustomGridItem(
-                    title: 'Height',
-                    subtitle: '${_height.toStringAsFixed(2)} cm',
-                    icon: LineIcons.sort_numeric_asc,
-                    color: Colors.blue,
-                  ),
-                  CustomGridItem(
-                    title: 'Weight',
-                    subtitle: '${_weight.toStringAsFixed(2)} kg',
-                    icon: LineIcons.balance_scale,
-                    color: Colors.green,
+                  SizedBox(height: 15),
+                  Container(
+                    height: MediaQuery.of(context).size.height * 0.7,
+                    padding: const EdgeInsets.all(15),
+                    child: GridView(
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        childAspectRatio: 1,
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 10,
+                        crossAxisSpacing: 10,
+                      ),
+                      children: [
+                        CustomGridItem(
+                          title: 'Heart Rate',
+                          subtitle: '${_heartRate.toStringAsFixed(0)} bpm',
+                          icon: LineIcons.heart_o,
+                          color: Colors.red,
+                        ),
+                        CustomGridItem(
+                          title: 'Distance',
+                          subtitle: '${_distance.toStringAsFixed(2)} km',
+                          icon: Icons.directions_walk,
+                          color: Colors.yellow[700],
+                        ),
+                        CustomGridItem(
+                          title: 'Height',
+                          subtitle: '${_height.toStringAsFixed(2)} cm',
+                          icon: LineIcons.sort_numeric_asc,
+                          color: Colors.blue,
+                        ),
+                        CustomGridItem(
+                          title: 'Weight',
+                          subtitle: '${_weight.toStringAsFixed(2)} kg',
+                          icon: LineIcons.balance_scale,
+                          color: Colors.green,
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
             ),
-          ],
-        ),
-      ),
     );
   }
 }
