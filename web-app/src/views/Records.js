@@ -14,26 +14,24 @@ import {
 } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { fetchRecords } from '../store/actions/records';
+import { fetchRecords, filterRecords } from '../store/actions/records';
 import CustomLoadingSpinner from '../components/CustomLoadingSpinner';
 
 const useStyles = makeStyles(theme => ({
   table: {
     minWidth: 650,
   },
-  button: {
-    backgroundColor: '#83e85a',
-    color: 'white',
-    padding: theme.spacing(1.6),
-    marginLeft: theme.spacing(1),
-    width: 100,
+  textInput: {
+    width: 500,
   },
 }));
 
 const Records = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const { records, isLoading } = useSelector(state => state.records);
+  const { records, filteredRecords, isLoading } = useSelector(
+    state => state.records
+  );
 
   useEffect(() => {
     if (records.length === 0) {
@@ -45,17 +43,19 @@ const Records = () => {
     return <CustomLoadingSpinner />;
   }
 
+  const filterHandler = searchQuery => {
+    dispatch(filterRecords(searchQuery));
+  };
+
   return (
     <Box>
       <Box p={2}>
-        <TextField variant='outlined' label='Search by username' />
-        <Button
-          className={classes.button}
-          size='large'
-          variant='contained'
-          color=''>
-          Search
-        </Button>
+        <TextField
+          variant='outlined'
+          className={classes.textInput}
+          label='Search by username'
+          onChange={event => filterHandler(event.target.value)}
+        />
       </Box>
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label='simple table'>
@@ -69,8 +69,8 @@ const Records = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {records.map((record, index) => (
-              <TableRow key={record.email}>
+            {filteredRecords.map((record, index) => (
+              <TableRow key={record.id}>
                 <TableCell component='th' scope='row'>
                   {index + 1}
                 </TableCell>

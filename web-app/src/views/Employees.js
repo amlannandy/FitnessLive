@@ -14,26 +14,24 @@ import {
 } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { fetchEmployees } from '../store/actions/employees';
+import { fetchEmployees, filterEmployees } from '../store/actions/employees';
 import CustomLoadingSpinner from '../components/CustomLoadingSpinner';
 
 const useStyles = makeStyles(theme => ({
   table: {
     minWidth: 650,
   },
-  button: {
-    backgroundColor: '#83e85a',
-    color: 'white',
-    padding: theme.spacing(1.6),
-    marginLeft: theme.spacing(1),
-    width: 100,
+  textInput: {
+    width: 500,
   },
 }));
 
 const Employees = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const { employees, isLoading } = useSelector(state => state.employees);
+  const { employees, filteredEmployees, isLoading } = useSelector(
+    state => state.employees
+  );
 
   useEffect(() => {
     if (employees.length === 0) {
@@ -45,17 +43,19 @@ const Employees = () => {
     return <CustomLoadingSpinner />;
   }
 
+  const filterHandler = searchQuery => {
+    dispatch(filterEmployees(searchQuery));
+  };
+
   return (
     <Box>
       <Box p={2}>
-        <TextField variant='outlined' label='Search by username' />
-        <Button
-          className={classes.button}
-          size='large'
-          variant='contained'
-          color=''>
-          Search
-        </Button>
+        <TextField
+          variant='outlined'
+          className={classes.textInput}
+          label='Search by username'
+          onChange={event => filterHandler(event.target.value)}
+        />
       </Box>
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label='simple table'>
@@ -69,7 +69,7 @@ const Employees = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {employees.map((employee, index) => (
+            {filteredEmployees.map((employee, index) => (
               <TableRow key={employee.email}>
                 <TableCell component='th' scope='row'>
                   {index + 1}
