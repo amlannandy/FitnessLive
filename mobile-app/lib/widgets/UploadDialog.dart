@@ -22,7 +22,7 @@ Widget uploadDialog({BuildContext context, Function notifyChanges}) {
           children: [
             Container(width: 50),
             Text(
-              'Upload Profile Picture',
+              'Upload Picture',
               style: TextStyle(
                 color: Colors.black.withOpacity(0.8),
                 fontFamily: 'Lato',
