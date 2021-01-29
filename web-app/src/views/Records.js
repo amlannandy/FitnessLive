@@ -12,6 +12,7 @@ import {
   Box,
   TextField,
 } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { fetchRecords, filterRecords } from '../store/actions/records';
@@ -78,7 +79,12 @@ const Records = () => {
                 <TableCell align='left'>{record.username}</TableCell>
                 <TableCell align='left'>{record.title}</TableCell>
                 <TableCell align='left'>
-                  <Button size='small' variant='outlined' color='secondary'>
+                  <Button
+                    component={Link}
+                    size='small'
+                    variant='outlined'
+                    color='secondary'
+                    to={`/records/${record.id}`}>
                     Details
                   </Button>
                 </TableCell>

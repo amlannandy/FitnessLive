@@ -1,5 +1,6 @@
 import {
   TOGGLE_RECORDS_LOADING,
+  FETCH_RECORD,
   FETCH_RECORDS,
   FILTER_RECORDS,
 } from '../actions/records';
@@ -7,6 +8,7 @@ import {
 const initialState = {
   isLoading: false,
   records: [],
+  record: null,
   filteredRecords: [],
 };
 
@@ -30,6 +32,12 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         filteredRecords: payload,
+      };
+    case FETCH_RECORD:
+      return {
+        ...state,
+        record: payload,
+        isLoading: false,
       };
     default:
       return state;
