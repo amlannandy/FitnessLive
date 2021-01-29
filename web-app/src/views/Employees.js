@@ -12,10 +12,11 @@ import {
   Box,
   TextField,
 } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { fetchEmployees, filterEmployees } from '../store/actions/employees';
 import CustomLoadingSpinner from '../components/CustomLoadingSpinner';
+import { fetchEmployees, filterEmployees } from '../store/actions/employees';
 
 const useStyles = makeStyles(theme => ({
   table: {
@@ -78,7 +79,12 @@ const Employees = () => {
                 <TableCell align='left'>{employee.username}</TableCell>
                 <TableCell align='left'>{employee.email}</TableCell>
                 <TableCell align='left'>
-                  <Button size='small' variant='outlined' color='secondary'>
+                  <Button
+                    component={Link}
+                    size='small'
+                    variant='outlined'
+                    color='secondary'
+                    to={`/employees/${employee.id}`}>
                     Details
                   </Button>
                 </TableCell>

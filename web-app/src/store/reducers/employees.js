@@ -1,11 +1,13 @@
 import {
-  TOGGLE_EMPLOYEES_LOADING,
+  FETCH_EMPLOYEE,
   FETCH_EMPLOYEES,
   FILTER_EMPLOYEES,
+  TOGGLE_EMPLOYEES_LOADING,
 } from '../actions/employees';
 
 const initialState = {
   isLoading: false,
+  employee: null,
   employees: [],
   filteredEmployees: [],
 };
@@ -25,6 +27,12 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: !currentIsLoading,
+      };
+    case FETCH_EMPLOYEE:
+      return {
+        ...state,
+        employee: payload,
+        isLoading: false,
       };
     case FILTER_EMPLOYEES:
       return {
