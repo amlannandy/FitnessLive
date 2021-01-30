@@ -1,16 +1,19 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fitness_live/services/HealthRecordProvider.dart';
 import 'package:http/http.dart' as http;
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/User.dart';
 import '../models/HealthData.dart';
 import '../models/HealthRecord.dart';
 
-const URL = 'http://192.168.0.151:5000/api/v1';
+const URL = 'http://192.168.0.152:5000/api/v1';
 
 class UserDatabaseService {
-  var _httpClient = http.Client();
+  final _httpClient = http.Client();
   final Firestore _db = Firestore.instance;
 
   Future<User> getUser(String id) async {
@@ -70,11 +73,8 @@ class UserDatabaseService {
         body: jsonEncode(postData));
     final data = jsonDecode(res.body);
     final List results = data['data']['results'];
-    //uploadResultsToFirestore();
     return results;
   }
-
-  void uploadResultsToFirestore() {}
 
   void updateHealthDataOnFirestore(String userId, HealthData healthData) {
     _db.collection('users').document(userId).updateData({
@@ -90,5 +90,20 @@ class UserDatabaseService {
         'steps': healthData.data.steps,
       },
     });
+  }
+
+  void sendDailyEmail() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    final storedDate = sharedPreferences.getString('date');
+    final todaysDate = HealthRecordProvider.getFormattedDate(Timestamp.now());
+    if (storedDate == todaysDate) return;
+    FirebaseUser user = await FirebaseAuth.instance.currentUser();
+    if (user == null) return;
+    await http.post(
+      URL + '/tracker/sendmail',
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({'email': user.email}),
+    );
+    await sharedPreferences.setString('date', todaysDate);
   }
 }
