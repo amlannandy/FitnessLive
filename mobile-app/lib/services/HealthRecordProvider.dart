@@ -5,6 +5,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../models/User.dart';
+import '../models/Message.dart';
+import '../models/HealthRecord.dart';
 import '../services/UtilityService.dart';
 import '../services/UserInfoProvider.dart';
 import '../services/UserDatabaseService.dart';
@@ -80,5 +82,24 @@ class HealthRecordProvider {
 
   static String getFormattedDate(Timestamp timestamp) {
     return DateFormat('dd-MM-yyyy').format(timestamp.toDate()).toString();
+  }
+
+  static Future<List<Message>> executeQuery(String text, String userId) async {
+    final res = await _db
+        .collection('healthRecords')
+        .where('userId', isEqualTo: userId)
+        .where('title', isEqualTo: text)
+        .getDocuments();
+    final docs = res.documents;
+    if (docs.isEmpty) {
+      return [Message(message: 'Didn`t find any matching record')];
+    } else {
+      List<Message> queries = [];
+      docs.forEach((doc) {
+        final record = HealthRecord.fromFirestore(doc);
+        queries.add(Message(message: record.title, record: record));
+      });
+      return queries;
+    }
   }
 }

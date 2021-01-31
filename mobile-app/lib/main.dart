@@ -6,6 +6,7 @@ import './screens/InitScreen.dart';
 import './screens/HomeScreen.dart';
 import './screens/LoginScreen.dart';
 import './screens/ProfileScreen.dart';
+import './screens/EnquiryScreen.dart';
 import './screens/UserInfoScreen.dart';
 import './screens/GoogleFitScreen.dart';
 import './screens/MedicalHistroyScreen.dart';
@@ -48,6 +49,7 @@ class MyApp extends StatelessWidget {
           '/init': (ctx) => InitScreen(),
           '/home': (ctx) => HomeScreen(),
           '/login': (ctx) => LoginScreen(),
+          '/enquiry': (ctx) => EnquiryScreen(),
           '/profile': (ctx) => ProfileScreen(),
           '/userinfo': (ctx) => UserInfoScreen(),
           '/googlefit': (ctx) => GoogleFitScreen(),

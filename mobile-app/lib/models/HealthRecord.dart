@@ -8,6 +8,7 @@ class HealthRecord {
   final Timestamp dateIssued;
   final Timestamp dateUploaded;
   final String imageUrl;
+  final String userId;
 
   HealthRecord({
     @required this.id,
@@ -16,6 +17,7 @@ class HealthRecord {
     @required this.dateIssued,
     @required this.dateUploaded,
     @required this.imageUrl,
+    @required this.userId,
   });
 
   factory HealthRecord.fromFirestore(DocumentSnapshot snapshot) {
@@ -28,6 +30,7 @@ class HealthRecord {
       dateIssued: data['dateIssued'] ?? null,
       dateUploaded: data['dateUploaded'] ?? null,
       imageUrl: data['imageUrl'] ?? null,
+      userId: data['userId'] ?? null,
     );
     return healthRecord;
   }

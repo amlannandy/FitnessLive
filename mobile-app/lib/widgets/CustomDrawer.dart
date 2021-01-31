@@ -21,7 +21,7 @@ class CustomDrawer extends StatelessWidget {
             LineIcons.history,
             'Medical History',
             'View your health records',
-            () => Navigator.of(context).pushNamed('/medicalhistory'),
+            () => Navigator.of(context).pushNamed('/enquiry'),
           ),
           customListTile(
             LineIcons.comment_o,
