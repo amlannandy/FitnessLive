@@ -4,7 +4,7 @@ const PocketData = ({ title, subtitle }) => {
   return (
     <div>
       <p>
-        {title} <br /> {subtitle}
+        <strong>{title}</strong> <br /> {subtitle}
       </p>
     </div>
   );
