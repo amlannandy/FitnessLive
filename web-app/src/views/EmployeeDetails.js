@@ -137,14 +137,31 @@ const EmployeeDetails = () => {
         </p>
       </Box>
       <Container maxWidth='md' component='main'>
-        <Card>
-          <CardHeader title='Basic Details' />
-          <CardContent>
-            <PocketData title='Email' subtitle={employee.email} />
-            <PocketData title='Email' subtitle={employee.email} />
-            <PocketData title='Email' subtitle={employee.email} />
-          </CardContent>
-        </Card>
+        <Box m={2}>
+          <Card>
+            <CardHeader title='Basic Details' />
+            <Box p={2}>
+              <Grid container spacing={3}>
+                <Grid item md={6}>
+                  <PocketData title='Email' subtitle={employee.email} />
+                  <PocketData title='Phone Number' subtitle={employee.phone} />
+                  <PocketData title='Age' subtitle={employee.age + ' years'} />
+                </Grid>
+                <Grid item md={6}>
+                  <PocketData title='Gender' subtitle={employee.gender} />
+                  <PocketData
+                    title='Height'
+                    subtitle={employee.height + ' cm'}
+                  />
+                  <PocketData
+                    title='Weight'
+                    subtitle={employee.weight + ' kg'}
+                  />
+                </Grid>
+              </Grid>
+            </Box>
+          </Card>
+        </Box>
       </Container>
       {!healthData ? null : (
         <Container maxWidth='md' component='main'>
