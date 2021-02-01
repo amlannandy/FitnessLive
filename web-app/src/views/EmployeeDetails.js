@@ -14,6 +14,7 @@ import {
 } from '@material-ui/core';
 import { AccountCircle } from '@material-ui/icons';
 
+import BarGraph from '../components/BarGraph';
 import PocketData from '../components/PocketData';
 import { fetchEmployee } from '../store/actions/employees';
 import CustomLoadingSpinner from '../components/CustomLoadingSpinner';
@@ -46,6 +47,9 @@ const useStyles = makeStyles(theme => ({
   space: {
     marginRight: theme.spacing(1),
   },
+  mainGrid: {
+    marginTop: 40,
+  },
 }));
 
 const EmployeeDetails = () => {
@@ -70,6 +74,7 @@ const EmployeeDetails = () => {
           color: '#ff304f',
           textColor: 'white',
           unit: 'bpm',
+          limit: 80,
         },
         {
           value: employee.data.oxygenSaturation,
@@ -77,6 +82,7 @@ const EmployeeDetails = () => {
           color: '#cabbe9',
           textColor: 'white',
           unit: '%',
+          limit: 95,
         },
         {
           value: employee.data.bodyTemperature,
@@ -84,6 +90,7 @@ const EmployeeDetails = () => {
           color: '#0b8457',
           textColor: 'white',
           unit: '° C',
+          limit: 37,
         },
         {
           value: employee.data.glucose,
@@ -91,6 +98,7 @@ const EmployeeDetails = () => {
           color: '#226089',
           textColor: 'white',
           unit: 'mg/dL',
+          limit: 140,
         },
         {
           value: employee.data.bloodPressure.split(' ')[0],
@@ -98,6 +106,7 @@ const EmployeeDetails = () => {
           color: '#facf5a',
           textColor: 'white',
           unit: employee.data.bloodPressure.split(' ')[1],
+          limit: 110,
         },
         {
           value: employee.data.electroCardiogram,
@@ -105,6 +114,7 @@ const EmployeeDetails = () => {
           color: '#61305d',
           textColor: 'white',
           unit: 'ms',
+          limit: 120,
         },
         {
           value: employee.data.respiration,
@@ -112,6 +122,7 @@ const EmployeeDetails = () => {
           color: '#293462',
           textColor: 'white',
           unit: 'bpm',
+          limit: 17,
         },
         {
           value: employee.data.steps,
@@ -119,6 +130,7 @@ const EmployeeDetails = () => {
           color: '#ff6d24',
           textColor: 'white',
           unit: 'steps',
+          limit: 10000,
         },
       ]
     : null;
@@ -128,14 +140,21 @@ const EmployeeDetails = () => {
       <Typography component='h3' variant='h5'>
         Employee Details
       </Typography>
-      <Box p={2} className={classes.paper} textAlign='center'>
-        <Avatar className={classes.avatar} src={employee.imageUrl}>
-          <AccountCircle className={classes.avatar} />
-        </Avatar>
-        <p>
-          {employee.name} <br /> {employee.username}
-        </p>
-      </Box>
+      <Grid className={classes.mainGrid} container spacing={3}>
+        <Grid item md={5}>
+          <Box p={1} className={classes.paper} textAlign='center'>
+            <Avatar className={classes.avatar} src={employee.imageUrl}>
+              <AccountCircle className={classes.avatar} />
+            </Avatar>
+            <p>
+              {employee.name} <br /> {employee.username}
+            </p>
+          </Box>
+        </Grid>
+        <Grid item md={7}>
+          <BarGraph healthData={healthData} />
+        </Grid>
+      </Grid>
       <Container maxWidth='md' component='main'>
         <Box m={2}>
           <Card>
