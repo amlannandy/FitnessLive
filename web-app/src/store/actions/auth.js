@@ -6,7 +6,7 @@ export const LOGOUT = 'LOGOUT';
 export const REGISTER = 'REGISTER';
 export const TOGGLE_AUTH_LOADING = 'TOGGLE_AUTH_LOADING';
 
-const URL = 'http://192.168.0.151:5000/api/v1/auth/';
+const URL = 'https://fitness-live-api.herokuapp.com/api/v1/auth/';
 
 export const login = (email, password) => async dispatch => {
   try {

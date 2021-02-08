@@ -24,6 +24,7 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'FitnessLive',
         theme: ThemeData(
           primaryColor: Colors.black,
