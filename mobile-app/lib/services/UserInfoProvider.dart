@@ -1,7 +1,7 @@
 import 'dart:io';
-import 'package:image_picker/image_picker.dart';
-import 'package:path/path.dart' as Path;
 import 'package:flutter/material.dart';
+import 'package:path/path.dart' as Path;
+import 'package:image_picker/image_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -108,10 +108,12 @@ class UserInfoProvider {
   }
 
   static void takePicture(ImageSource imageSource, Function callback) async {
-    File image = await ImagePicker.pickImage(
+    ImagePicker imagePicker = ImagePicker();
+    PickedFile pickedImage = await imagePicker.getImage(
       source: imageSource,
       maxWidth: 600,
     );
+    File image = File(pickedImage.path);
     callback(image);
   }
 }

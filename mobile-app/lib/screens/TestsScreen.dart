@@ -43,7 +43,7 @@ class _TestsScreenState extends State<TestsScreen> {
   }
 
   Color _getColor(double value) {
-    if (value > 85) {
+    if (value > 90) {
       return Colors.red[700];
     } else if (value > 70) {
       return Colors.orange[700];
@@ -89,8 +89,12 @@ class _TestsScreenState extends State<TestsScreen> {
                       gradeTile(),
                       SizedBox(height: 20),
                       for (var item in _results)
-                        ResultBar(item['parameter'], item['value'],
-                            _getColor(item['value']))
+                        ResultBar(
+                          item['parameter'],
+                          item['value'],
+                          _getColor(item['value']),
+                          item['link'],
+                        )
                     ],
                   ),
                 ),
