@@ -5,32 +5,50 @@ const generateTestResults = healthData => {
       {
         parameter: 'Probablity of Coronary Artery Disease',
         value: getCoronaryArteryDiseaseResult(healthData.heartRate),
+        link:
+          'https://www.mayoclinic.org/diseases-conditions/coronary-artery-disease/symptoms-causes/syc-20350613',
       },
       {
-        parameter: 'Probablity of High Blood Pressure',
+        parameter: 'Probablity of Diabetes',
         value: getBloodPressureResult(),
+        link:
+          'https://www.healthline.com/health/diabetes#:~:text=Diabetes%20mellitus%2C%20commonly%20known%20as,the%20insulin%20it%20does%20make.',
       },
       {
         parameter: 'Probablity of Hypoglycemia',
         value: getHypoglycemiaResult(healthData.glucose),
+        link: 'https://www.healthline.com/health/hypoglycemia',
       },
       {
-        parameter: 'Probablity of Fever',
+        parameter: 'Probablity of Prediabetes',
         value: getFeverResult(healthData.bodyTemperature),
+        link:
+          "https://www.webmd.com/diabetes/what-is-prediabetes#:~:text=Prediabetes%20is%20when%20your%20blood,doesn't%20usually%20cause%20symptoms.",
       },
       {
-        parameter: 'Probablity of Respiratory Disorder',
+        parameter: 'Probablity of Bronchiectasis',
         value: getRespiratoryDisorderResult(),
+        link:
+          'https://www.healthline.com/health/bronchiectasis#:~:text=Bronchiectasis%20is%20a%20condition%20where,and%20blockages%20of%20the%20airways.',
       },
       {
-        parameter: 'Probablity of Anemia',
+        parameter: 'Probablity of Hypoxemia',
         value: getAnemiaResult(healthData.oxygenSaturation),
+        link:
+          'https://www.healthline.com/health/hypoxemia#hypoxia-vs-hypoxemia',
       },
       {
-        parameter: 'Probablity of Heart Disease',
+        parameter: 'Probablity of Asthma',
         value: getHeartDiseaseResult(healthData.electroCardiogram),
+        link:
+          'https://www.mayoclinic.org/diseases-conditions/asthma/symptoms-causes/syc-20369653#:~:text=Asthma%20is%20a%20condition%20in,asthma%20is%20a%20minor%20nuisance.',
       },
-      { parameter: 'Fitness Level', value: getFitnessLevel(healthData.steps) },
+      {
+        parameter: 'Fitness Level',
+        value: getFitnessLevel(healthData.steps),
+        link:
+          'https://www.active.com/fitness/articles/5-simple-tips-for-fitness-success',
+      },
     ],
   };
 };

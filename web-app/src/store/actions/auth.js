@@ -1,5 +1,4 @@
 import { setAlert } from '../actions/alert';
-//import history from '../../history';
 
 export const AUTHENTICATE = 'AUTHENTICATE';
 export const LOGOUT = 'LOGOUT';
