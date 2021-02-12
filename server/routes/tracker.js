@@ -67,17 +67,14 @@ router.post(
     }
     const { email } = req.body;
     const healthData = generateHealthData();
-    const arr = Object.entries(healthData.data);
-    let text = 'Hello! Here is your daily test report.';
-    arr.forEach(a => (text += `\n${a[0]} - ${a[1]}`));
     await sendMail({
       email: email,
       subject: `Fitness Live Daily Test Report`,
-      message: text,
+      healthData: healthData,
     });
     res.status(200).json({
       success: true,
-      data: text,
+      data: healthData,
     });
   }
 );

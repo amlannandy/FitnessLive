@@ -11,7 +11,7 @@ import '../models/HealthData.dart';
 import '../models/HealthRecord.dart';
 
 // TODO: Change url to hosted api
-const URL = 'http://192.168.0.151:5000/api/v1';
+const URL = 'https://fitness-live-api.herokuapp.com/api/v1';
 
 class UserDatabaseService {
   final _httpClient = http.Client();
