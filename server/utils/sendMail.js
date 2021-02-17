@@ -1,16 +1,14 @@
 const nodemailer = require('nodemailer');
+const sendInBlue = require('nodemailer-sendinblue-transport');
 
 const getEmailTemplate = require('./getEmailTemplate');
 
 const sendEmail = async options => {
-  const transporter = nodemailer.createTransport({
-    host: process.env.SMTP_HOST,
-    port: process.env.SMTP_PORT,
-    auth: {
-      user: process.env.SMTP_EMAIL,
-      pass: process.env.SMTP_PASSWORD,
-    },
-  });
+  const transporter = nodemailer.createTransport(
+    sendInBlue({
+      apiKey: process.env.V2_API_KEY,
+    })
+  );
   const message = {
     from: `${process.env.FROM_NAME}<${process.env.FROM_EMAIL}>`,
     to: options.email,
@@ -19,7 +17,7 @@ const sendEmail = async options => {
   };
 
   const info = await transporter.sendMail(message);
-  console.log('Message sent: ' + info.messageId);
+  console.log(info);
 };
 
 module.exports = sendEmail;

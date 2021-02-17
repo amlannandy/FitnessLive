@@ -67,15 +67,22 @@ router.post(
     }
     const { email } = req.body;
     const healthData = generateHealthData();
-    await sendMail({
-      email: email,
-      subject: `Fitness Live Daily Test Report`,
-      healthData: healthData,
-    });
-    res.status(200).json({
-      success: true,
-      data: healthData,
-    });
+    try {
+      await sendMail({
+        email: email,
+        subject: `Fitness Live Daily Test Report`,
+        healthData: healthData,
+      });
+      res.status(200).json({
+        success: true,
+        data: healthData,
+      });
+    } catch (error) {
+      res.status(500).json({
+        success: false,
+        errors: ['Internal Server Error'],
+      });
+    }
   }
 );
 
