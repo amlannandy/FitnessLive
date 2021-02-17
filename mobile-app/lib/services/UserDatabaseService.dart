@@ -10,7 +10,6 @@ import '../models/User.dart';
 import '../models/HealthData.dart';
 import '../models/HealthRecord.dart';
 
-// TODO: Change url to hosted api
 const URL = 'https://fitness-live-api.herokuapp.com/api/v1';
 
 class UserDatabaseService {
@@ -53,8 +52,7 @@ class UserDatabaseService {
     final res = await _httpClient.get(URL + '/tracker');
     final data = jsonDecode(res.body);
     final healthData = HealthData.fromJSON(data['data']);
-    // TODO: Enable firestore upload before submission
-    //updateHealthDataOnFirestore(userId, healthData);
+    updateHealthDataOnFirestore(userId, healthData);
     return healthData;
   }
 
