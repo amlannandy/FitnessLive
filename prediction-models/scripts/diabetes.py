@@ -41,3 +41,8 @@ print(sample)
 res = knn.predict(sample)
 prob = knn.predict_proba(sample)
 print(res, prob)
+
+import pickle
+
+# create .pkl file
+pickle.dump(knn, open('model.pkl', 'wb'))
