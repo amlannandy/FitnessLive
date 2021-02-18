@@ -1,8 +1,7 @@
-import sys
 import pandas as pd
 import numpy as np
 
-def run_diabetes_model():
+def run_diabetes_model(glucose, blood_pressure):
     # Url to the raw csv file in the github repository
     url = 'https://raw.githubusercontent.com/amlannandy/FitnessLive/master/prediction-models/data/diabetes.csv?token=AK2OSJ3OPFNS7IZC64IHH53AGYKME'
 
@@ -32,7 +31,7 @@ def run_diabetes_model():
     knn.fit(X_train, y_train)
 
     # Create sample
-    sample = np.array([6, 128, 72, 35, 0, 33.6, 0.627, 50])
+    sample = np.array([6, glucose, blood_pressure, 35, 0, 33.6, 0.627, 50])
     sample = sample.reshape(1, -1)
 
     # Test sample
