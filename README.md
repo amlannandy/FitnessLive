@@ -42,7 +42,7 @@ Test out the web application <a href='https://fitness-live-web.herokuapp.com/'>h
 3. Install required packages using
 
    ```
-   pip install requirements.text
+   pip install requirements.txt
    ```
    
 4. Navigate to prediction-models/scripts/
