@@ -1,4 +1,5 @@
 const express = require('express');
+const { spawn } = require('child_process');
 const { check, validationResult } = require('express-validator');
 
 const sendMail = require('../utils/sendMail');
@@ -85,5 +86,16 @@ router.post(
     }
   }
 );
+
+router.post('/test', async (req, res) => {
+  const { spawn } = require('child_process');
+  const pyProg = spawn('python', ['test.py']);
+
+  pyProg.stdout.on('data', function (data) {
+    console.log(data.toString());
+    res.write(data);
+    res.end('end');
+  });
+});
 
 module.exports = router;
