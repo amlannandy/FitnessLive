@@ -37,15 +37,16 @@ Test out the web application <a href='https://fitness-live-web.herokuapp.com/'>h
 
 ## Running Prediction Models Independently
 
-1. Create a Virtual Environment
-2. Activate the Virtual Environment
-3. Install required packages using
+1. Navigate to prediction-models/
+2. Create a Virtual Environment
+3. Activate the Virtual Environment
+4. Install required packages using
 
    ```
    pip install requirements.txt
    ```
    
-4. Navigate to prediction-models/scripts/
+5. scripts/
 5. Run the following command
 
    ```
