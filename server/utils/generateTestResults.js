@@ -1,16 +1,19 @@
+const getCHDResult = require('../tests/getCHDResults');
+const getDiabetesResult = require('../tests/getDiabetesResult');
+
 const generateTestResults = healthData => {
   return {
     lastUpdated: new Date().toUTCString(),
     results: [
       {
         parameter: 'Probablity of Coronary Artery Disease',
-        value: getCoronaryArteryDiseaseResult(healthData.heartRate),
+        value: getCHDResult(healthData),
         link:
           'https://www.mayoclinic.org/diseases-conditions/coronary-artery-disease/symptoms-causes/syc-20350613',
       },
       {
         parameter: 'Probablity of Diabetes',
-        value: getBloodPressureResult(),
+        value: getDiabetesResult(healthData),
         link:
           'https://www.healthline.com/health/diabetes#:~:text=Diabetes%20mellitus%2C%20commonly%20known%20as,the%20insulin%20it%20does%20make.',
       },
